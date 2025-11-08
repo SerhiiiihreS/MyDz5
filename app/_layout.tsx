@@ -1,24 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+// Створіть кнопку, яка буде вмикати ліхтарик та вимикати. Виведіть статус ліхтаря.
+// 'use client';
+import { useState} from 'react';
+import { View,Text,StyleSheet,Button} from 'react-native';
+import { Flashlight } from 'expo-flashlight';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+export default function FlashlightToggle() {
+  const [isFlashlightOn, setIsFlashlightOn] = useState(false);
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const toggleFlashlight = () => {
+    setIsFlashlightOn((prevState) => !prevState);
+  };
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
-}
+  return (<>
+    <View style={styles.container}>
+      <Button onPress={toggleFlashlight} title={isFlashlightOn ? 'Вимкнути ліхтарик' : 'Увімкнути ліхтарик'} />
+      <Text>Статус ліхтаря: {isFlashlightOn ? 'Увімкнено' : 'Вимкнено'}</Text>
+    </View>
+  </>);
+} 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
