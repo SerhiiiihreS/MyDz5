@@ -2,7 +2,7 @@
 // 'use client';
 import { useState} from 'react';
 import { View,Text,StyleSheet,Button} from 'react-native';
-import { Flashlight } from 'expo-flashlight';
+// import { Flashlight } from 'expo-flashlight';
 
 
 export default function FlashlightToggle() {
